@@ -21,7 +21,21 @@ $sum = addTwoNumber(400,'800');
 $substract = subThreeNumbers(400,40.90,300);
 echo "The sum of two numbers are : ", $sum ," the substraction of two numbers are : ",$substract;
 
+//how to use default parameter
+function displayingNames(string $fullNames="Muheto Hodal", int $ages=30){
+    echo "<br/>Wellcome $fullNames , You have $ages years Old  ";
+}
 
+displayingNames();
+displayingNames("Umwiza gaela",9);
 
+//you can write the function and specify the return type
+
+function calculateMoney(float $x, float $y):int {
+    $sum = (int)($x + $y);
+    echo "value of $x and $y is equal to $sum";
+    return $x + $y;
+}
+calculateMoney(3.9,40.4);
 ?>
 </h1>
