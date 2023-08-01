@@ -1,47 +1,58 @@
 <html>
-
+<style>
+    form{
+    background:#333;
+    color:#fff;
+    margin: auto;
+    padding: 100px;
+}
+div{
+    margin:20px 0px;
+}
+span{
+    color:#e33;
+}
+</style>
 <body>
     <?php 
     $firstNameErr = $lastNameErr = $agesErr=$genderErr="";
     $firstNameValue = $lastNameValue = $agesValue = $genderValue = "";
-    
-    if($_REQUEST["REQUEST_METHOD"] == "POST"){
-        $my_first_name = test_input($_POST['firstName']);
-        $my_last_name = test_input($_POST['lastName']);
-        $my_ages = test_input($_POST['ages']);
-        $my_gender = test_input($_POST['food']);
+    function test_input($data){
+        $trim_data = trim($data);
+        $striped_data = stripcslashes($trim_data);
+        $encripted_data = htmlspecialchars($striped_data);
+        return $encripted_data;
+     }
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
 
- function test_input($data){
-    $trim_data = trim($data);
-    $striped_data = stripcslashes($trim_data);
-    $encripted_data = htmlspecialchars($striped_data);
-    return $encripted_data;
- }
-
+     $my_first_name = test_input($_POST['firstName']);
+     $my_last_name = test_input($_POST['lastName']);
+     $my_ages = test_input($_POST['ages']);
+    //  $my_gender = test_input($_POST['gender']);
       if(empty($_POST['firstName'])){
          $firstNameErr = "Your First Name is must!!!";
       }else{
-         $lastNameValue ="FirstName";
+         $lastNameValue =$my_first_name;
       };
       if(empty($_POST['lastName'])){
          $lastNameErr = "your Last Name is must";
       }else{
-         $lastNameValue = "LastName";
+         $lastNameValue = $my_last_name;
       };
       if(empty($_POST['ages'])){
          $agesErr = "Your Ages is Reuired";
     }else{
-    $agesValue = "Ages";
+    $agesValue =$my_ages;
    };
-   if(empty($_POST['food'])){
+   if(empty($_POST['gender'])){
     $genderErr = "you must choose any food";
    }else{
-    $genderValue ="gender was selected";
+    $genderValue = $my_gender;
    };
 }
     ?>
 
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
         <div>
             <label for="fname">First Name</label>
             <input type="text" name="firstName" id="fname">
@@ -61,19 +72,19 @@
         </div>
 
         <div>
-            <h1> Selsct what you like!!!</h1>
+            <h1> Select what you like!!!</h1>
             <div>
 
-            </div><input type="radio" name="food" id="eggs">
+            </div><input type="radio" name="gender" id="eggs">
             <label for="eggs">Eggs</label>
         </div>
-        </div><input type="radio" name="food" id="meat">
+        </div><input type="radio" name="gender" id="meat">
         <label for="meat">Meat</label>
         </div>
-        </div><input type="radio" name="food" id="Milk">
+        </div><input type="radio" name="gender" id="Milk">
         <label for="Milk">Milk</label>
         </div>
-        </div><input type="radio" name="food" id="Avocado">
+        </div><input type="radio" name="gender" id="Avocado">
         <label for="Avocado">Avocado</label>
         </div>
         <div><span><?php echo $genderErr ?></span></div>
