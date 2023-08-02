@@ -32,12 +32,20 @@ span{
       if(empty($_POST['firstName'])){
          $firstNameErr = "Your First Name is must!!!";
       }else{
-         $lastNameValue =$my_first_name;
+        if(!preg_match("[/^a-zA-Z-]$/")){
+            $firstNameErr ="Special chars are not allowed!!";
+        }else{
+            $lastNameValue =$my_first_name;
+        }
       };
       if(empty($_POST['lastName'])){
          $lastNameErr = "your Last Name is must";
       }else{
-         $lastNameValue = $my_last_name;
+        if(!preg_match("[/^a-zA-Z-]$")){
+            $lastNameErr ="Only letters and white space allowed";
+        }else{
+            $lastNameValue = $my_last_name;
+        }
       };
       if(empty($_POST['ages'])){
          $agesErr = "Your Ages is Reuired";
@@ -49,8 +57,14 @@ span{
    }else{
     $genderValue = $my_gender;
    };
+
+   if(empty( $lastNameValue)&&empty($my_ages)&&empty($my_last_name)){
+    echo "<p>All input are required </p>";
+}else{
+  echo "Hello  $lastNameValue $lastNameValue your Ages are : $genderValue";  
 }
-    ?>
+}
+ ?>
 
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
         <div>
@@ -91,18 +105,7 @@ span{
         </div>
         <div><input type="submit" value="Save Details"></div>
     </form>
-    <?php
-    if($_SERVER['REQUEST_METHOD']=="POST"){
-        $myFirstName = $_POST['firstName'];
-        $myLastName = $_POST['lastName'];
-        $myAges = $_POST['ages'];
-        if(empty($myFirstName)&&empty($myAges)&&empty($myLastName)){
-            echo "<p>All input are required </p>";
-        }else{
-          echo "Hello $myFirstName $myLastName your Ages are : $myAges";  
-        }
-    }
-     ?>
+  
 </body>
 
 </html>
