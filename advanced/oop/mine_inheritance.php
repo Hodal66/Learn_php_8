@@ -12,7 +12,7 @@ class Student{
         $this->className = $className;
     }
 
-    public function mainIntroduction(){
+    public function mainIntroduction(){ //When We use protected modifier out side of the class We can get an error!!
         echo "wellcome to my class number 15";
     }
 
@@ -28,7 +28,9 @@ class SeniorOneStudent extends Student{
         }else{
             echo "<br/>This Student is steal young";
         }
+        // $this->mainIntroduction(); This will work fine because is inside of the class
     }
+   
 }
 echo "<h2>Allinformation Of Student in Senior One !!!<br/><br/></h2> <h3>";
 
